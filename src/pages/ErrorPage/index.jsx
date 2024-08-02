@@ -2,7 +2,7 @@ import React from "react";
 import styles from './index.module.css';
 
 
-function Login() {
+function ErrorPage() {
     return (
         <>
         
@@ -10,4 +10,4 @@ function Login() {
         )
 }
 
-export default Login
+export default ErrorPage
