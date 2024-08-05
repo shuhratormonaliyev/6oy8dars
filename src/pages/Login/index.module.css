@@ -1,0 +1,71 @@
+body {
+    font-family: sans-serif;
+    background-color: bisque;
+}
+.form{
+    
+    width:600px;
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 100px;
+    text-align: center;
+    color: white;
+}
+.form input{
+    border: none;
+    border: 1px solid black;
+    opacity: 0.8;
+}
+input::placeholder{
+    color: black;
+}
+.form *{
+    padding: 12px;
+    border-radius:8px;
+    color: black;
+    font-size: 1.1rem;
+}
+.Forms{
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+    color: black;
+}
+.nextBtn{
+    background-color: aliceblue;
+    transition: all 0.5s;
+    text-decoration: none;
+    width: 400px;
+    padding: 12px;
+    border: 1px solid black;
+    font-size: 1.1rem;
+    opacity: 0.8;
+    letter-spacing: 2px;
+}
+.nextBtn:hover{
+    background-color: rgb(106, 116, 222);
+    color: white;
+    /* opacity: 0.8; */
+    border: 3px solid rgb(27, 28, 27);
+    /* letter-spacing: 2px; */
+}
+button{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid black;
+    font-size: 1.1rem;
+    opacity: 0.8;
+    letter-spacing: 2px;
+}
+button:hover{
+    background-color: black;
+    color: black;
+    opacity: 0.8;
+    border: 3px solid black;
+    letter-spacing: 2px;
+}

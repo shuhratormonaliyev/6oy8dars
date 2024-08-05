@@ -1,42 +1,59 @@
-import React, {useEffect, useState} from "react";
-import { Router , Route , useNavigate } from "react-router-dom";
-import Register from "./pages/Register";
-import ErrorPage from "./pages/ErrorPage";
-import Login from './pages/ErrorPage';
+import React, { useState } from "react";
+import { useEffect } from "react";
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import Login from './pages/Login';
+import Register from './pages/Register';
 import Home from './pages/Home';
+import './App.css'
 
 function App() {
-const [token, setToken] = useState('');
-const navigate = useNavigate();
+  const [token, setToken] = useState('');
+  const [isAuth, setIsAuth] = useState(false);
+  const location = useLocation();
 
-useEffect(function () {
-  if(localStorage.getItem('token')) {
-    setToken(localStorage.getItem('token'))
+  const navigate = useNavigate();
+
+  function ProtectedRoute({ isAuthenticated, children }) {
+    if (!isAuthenticated) {
+      navigate('/');
+    }
+
+    return children;
   }
-}, []);
 
+  useEffect(function() {
+    if(localStorage.getItem('token')) {
+      setToken(localStorage.getItem('token'))
+    }
+  }, [])
 
-function ProtectedRoute({food , children}) {
-  if (!food) {
-    navigate('./login');
-  }
-  return children;
-}
+  useEffect(function() {
+    if (!isAuth && location.pathname != '/register') {
+      navigate('/login')
+    }
+  }, [token, navigate])
 
-  return(
-    <div>
+  useEffect(function() {
+    setIsAuth(token ? true: false)
+  }, [token])
+
+  return (
+    <div className='container'>
       <Routes>
-        <Route path="/regiter" element = {<Register></Register>}></Route>
-        <Route path="/login" element = {<Login></Login>}></Route>
-        <Route index element = {<ProtectedRoute food={token ? true : false}>
-          <Home></Home>
-          </ProtectedRoute>}></Route>
+        <Route path='/login' element={<Login></Login>}></Route>
+        <Route path='/register' element={<Register></Register>}></Route>
 
-
-        <Route path="*" element = {<ErrorPage></ErrorPage>}></Route>
+        <Route
+          path='/'
+          element={
+            <ProtectedRoute isAuthenticated={isAuth}>
+              <Home></Home>
+            </ProtectedRoute>
+          }
+        ></Route>
       </Routes>
     </div>
-    )
+  );
 }
 
-export default App
+export default App;
